@@ -1,0 +1,23 @@
+---
+title: 'Known Limitations'
+description: 'K2D is designed specifically for the far edge, predominately Industrial IOT, where devices are heavily resource-constrained and generally serve a singular purpose.'
+sidebar_position: 8
+---
+
+We have architecturally constrained the Kubernetes API's we support, so as to focus the use of K2D towards the intended use case. The API's we have elected to support are assumed sufficient to deploy and triage the most common IIoT applications, that run on a single node, and in a stateless manner. As a result, there are limitations in Kubernetes instructions that we support.
+
+We are open to extending these APIs based on feedback, so have you say...
+
+| Limitation                                                                                                      | Reason                                                                                                                        |
+| --------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| Secrets are not encoded and are stored as plain text                                                            | Secrets need to be bind-mounted to the running container, so cannot be encoded at rest. Registry secrets are encoded at rest. |
+| DaemonSet and StatefulSet workloads are not supported                                                           | These are assumed not needed for IIoT use cases at the far edge.                                                              |
+| Only the Portainer Edge agent async capabilities are supported                                                  | Portainer async agent is the preferred way of managing far-edge devices                                                       |
+| kubectl exec is not supported                                                                                   | This will be addressed in the future.                                                                                         |
+| Helm will fail the installation if a resource that a chart depends on is not supported                          | By design. Make sure to include only resources that are supported by k2d when deploying your Helm charts.                     |
+| kubectl —dry-run=server does not simulate the operations on the server and instead returns the applied resource | This is assumed not needed for IIoT use cases at the far edge.                                                                |
+| CRDs are not supported                                                                                          | These are assumed not needed for IIoT use cases at the far edge.                                                              |
+| Service Accounts are not supported                                                                              | By design, looking at ways to extend this in the future.                                                                      |
+| Ingress service type is not supported                                                                           | By design, looking at ways to extend this in the future.                                                                      |
+| Local Storage Class is only supported                                                                           | By design, looking at ways to extend this in the future when CSI drivers are common for Docker Engine level.                  |
+| Persistent Volume creation is only supported via Persistent Volume Claim                                        | By design, looking at ways to extend this in the future.                                                                      |

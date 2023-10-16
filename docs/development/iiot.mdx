@@ -1,0 +1,374 @@
+---
+title: 'Common IIoT application manifest examples'
+description: 'A list of common IIoT application manifests that you can use with k2d'
+sidebar_position: 5
+---
+
+# Node-Red
+
+```bash
+kubectl apply -f https://downloads.portainer.io/k2d/k2d-nodered.yml
+```
+
+<details>
+
+<summary>Manifest</summary>
+
+```yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+    name: node-red
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: node-red
+    namespace: node-red
+    labels:
+        app: node-red
+spec:
+    selector:
+        matchLabels:
+            app: node-red
+    template:
+        metadata:
+            labels:
+                app: node-red
+        spec:
+            containers:
+                - name: node-red
+                  image: nodered/node-red:latest
+                  ports:
+                      - containerPort: 1880
+                  securityContext:
+                      privileged: true
+                  volumeMounts:
+                      - name: node-red-data
+                        mountPath: /data
+                  env:
+                      - name: NODE_NAME
+                        valueFrom:
+                            fieldRef:
+                                fieldPath: spec.nodeName
+                      - name: TZ
+                        value: America/Los_Angeles
+            volumes:
+                - name: node-red-data
+                  persistentVolumeClaim:
+                      claimName: node-red-claim
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+    name: node-red-claim
+    namespace: node-red
+spec:
+    accessModes:
+        - ReadWriteOnce
+    resources:
+        requests:
+            storage: 1Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: node-red
+    namespace: node-red
+spec:
+    selector:
+        app: node-red
+    type: LoadBalancer
+    ports:
+        - name: node-red-ui
+          port: 1880
+          protocol: TCP
+          targetPort: 1880
+```
+
+</details>
+
+# Eclipse Mosquitto
+
+```bash
+kubectl apply -f https://downloads.portainer.io/k2d/k2d-mosquitto.yml
+```
+
+<details>
+
+<summary>Manifest</summary>
+
+```yaml
+kind: Namespace
+apiVersion: v1
+metadata:
+    name: mosquitto
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: mosquitto
+    namespace: mosquitto
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: mosquitto
+    template:
+        metadata:
+            labels:
+                app: mosquitto
+        spec:
+            containers:
+                - name: mosquitto
+                  image: eclipse-mosquitto
+                  ports:
+                      - containerPort: 1883
+                  volumeMounts:
+                      - mountPath: /mosquitto/config/mosquitto.conf
+                        name: config
+            volumes:
+                - name: config
+                  configMap:
+                      name: mosquitto-config
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+    name: mosquitto-config
+    namespace: mosquitto
+data:
+    mosquitto.conf: |
+        listener 1883
+        allow_anonymous true
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: mosquitto-mqtt
+    namespace: mosquitto
+spec:
+    selector:
+        app: mosquitto
+    ports:
+        - protocol: TCP
+          port: 1883
+          targetPort: 1883
+    type: NodePort
+```
+
+</details>
+
+# InfluxDB
+
+```bash
+kubectl apply -f https://downloads.portainer.io/k2d/k2d-influxdb.yml
+```
+
+<details>
+
+<summary>Manifest</summary>
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: influxdb-deployment
+spec:
+    selector:
+        matchLabels:
+            app: influxdb
+    template:
+        metadata:
+            labels:
+                app: influxdb
+        spec:
+            containers:
+                - image: influxdb:1.8
+                  name: influxdb
+                  ports:
+                      - containerPort: 8086
+                        name: http-influx
+                        protocol: TCP
+                  volumeMounts:
+                      - mountPath: /var/lib/influxdb
+                        name: influxdb-data
+                      - mountPath: /etc/influxdb/influxdb.conf
+                        name: influxdb-config
+                        subPath: influxdb.conf
+                        readOnly: true
+                  envFrom:
+                      - secretRef:
+                            name: influxdb-secrets
+            volumes:
+                - name: influxdb-data
+                  persistentVolumeClaim:
+                      claimName: influxdb
+                - name: influxdb-config
+                  configMap:
+                      name: influxdb-config
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: influx
+spec:
+    ports:
+        - port: 8086
+          protocol: TCP
+          targetPort: 8086
+    selector:
+        app: influxdb
+    type: LoadBalancer
+
+---
+kind: 'PersistentVolumeClaim'
+apiVersion: 'v1'
+metadata:
+    name: influxdb
+spec:
+    accessModes:
+        - 'ReadWriteOnce'
+    resources:
+        requests:
+            storage: '10Gi'
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+    name: influxdb-config
+data:
+    influxdb.conf: |+
+        bind-address = "127.0.0.1:8088"
+
+        [meta]
+          dir = "/var/lib/influxdb/meta"
+
+        [data]
+          dir = "/var/lib/influxdb/data"
+          wal-dir = "/var/lib/influxdb/wal"
+
+        [http]
+          auth-enabled = true
+---
+apiVersion: v1
+kind: Secret
+metadata:
+    name: influxdb-secrets
+type: Opaque
+stringData:
+    INFLUXDB_ADMIN_USER: admin
+    INFLUXDB_ADMIN_PASSWORD: admin
+    INFLUXDB_DB: generic
+```
+
+</details>
+
+# Grafana
+
+```bash
+kubectl apply -f https://downloads.portainer.io/k2d/k2d-grafana.yml
+```
+
+<details>
+
+<summary>Manifest</summary>
+
+```yaml
+kind: Namespace
+apiVersion: v1
+metadata:
+    name: monitoring
+    labels:
+        name: monitoring
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    labels:
+        app: grafana
+    name: grafana
+    namespace: monitoring
+spec:
+    selector:
+        matchLabels:
+            app: grafana
+    template:
+        metadata:
+            labels:
+                app: grafana
+        spec:
+            securityContext:
+                runAsUser: 1000
+                runAsGroup: 1000
+            containers:
+                - name: grafana
+                  image: grafana/grafana:9.1.0
+                  imagePullPolicy: IfNotPresent
+                  ports:
+                      - containerPort: 3000
+                        name: http-grafana
+                        protocol: TCP
+                  # readiness and liveness probes will be ignored by k2d
+                  # as they are not yet supported
+                  readinessProbe:
+                      failureThreshold: 3
+                      httpGet:
+                          path: /robots.txt
+                          port: 3000
+                          scheme: HTTP
+                      initialDelaySeconds: 10
+                      periodSeconds: 30
+                      successThreshold: 1
+                      timeoutSeconds: 2
+                  livenessProbe:
+                      failureThreshold: 3
+                      initialDelaySeconds: 30
+                      periodSeconds: 10
+                      successThreshold: 1
+                      tcpSocket:
+                          port: 3000
+                      timeoutSeconds: 1
+                  # requests will be ignored by k2d as they are not yet supported
+                  resources:
+                      requests:
+                          cpu: 250m
+                          memory: 750Mi
+                  volumeMounts:
+                      - mountPath: /var/lib/grafana
+                        name: grafana-pv
+                  user:
+            volumes:
+                - name: grafana-pv
+                  persistentVolumeClaim:
+                      claimName: grafana-claim
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+    name: grafana-claim
+    namespace: monitoring
+spec:
+    accessModes:
+        - ReadWriteOnce
+    resources:
+        requests:
+            storage: 1Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: grafana
+    namespace: monitoring
+spec:
+    ports:
+        - port: 3000
+          protocol: TCP
+          targetPort: 3000
+    selector:
+        app: grafana
+    type: NodePort
+```
+
+</details>

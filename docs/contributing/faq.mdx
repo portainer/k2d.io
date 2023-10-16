@@ -1,0 +1,35 @@
+---
+title: 'Frequently Asked Questions'
+description: 'Frequently Asked Questions'
+sidebar_position: 2
+---
+
+# Will you support all Kubernetes APIs, and will k2d get Kubernetes compliance certified?
+
+This project aims to provide a way to manage singular Docker devices at the far edge. The devices do not need to support the entire Kubernetes API command set, so we plan to support a core set of instructions required to deploy common IOT management containers such as NodeRed, MQTT Brokers, InfluxDB, Grafana, Protocol Transformers, etc. We assume the only requirement would be stateless containers, temporary data persistence, and that only simple port exposure (NodePorts) would be sufficient. Of course, if there are APIs that the community thinks we should add, we will look at adding them accordingly. We are not seeking to obtain Kubernetes Compliance for K2D.
+
+# Why not just use k3S, k0s, and MicroK8s?
+
+Lightweight Kubernetes distributions (K3s, K0s, MicroK8s) are excellent at what they do, which is to make full upstream Kubernetes usable on lower-power devices. However, all of these distributions must retain 100% conformant Kubernetes status, and as such, still require at least 2GB of RAM to actually be usable in the field. **If your devices have more than 2GB of RAM (ideally >=4GB), these distributions are likely a better choice for you than K2D.** Be aware, though, that these distributions are still CPU and IO heavy, consistently using 5-10% CPU and performing a large number of cluster quorum IO writes, negatively impacting SD-Card lifespan.
+
+# Why not just use Docker?
+
+**If you can run Docker natively, DO SO..** it is still the best way of running containers on resource-constrained devices. K2D is designed to be used by Organizations that have a desire/policy to manage all of their remote environments via Kubernetes constructs but would be otherwise unable to for certain classes of devices or due to engineering operations concerns.
+
+# Is k2d Open Source?
+
+K2D is released as "source available".
+
+This license provides you with the right to copy, modify, create derivative works, redistribute, and make non-production use of the Licensed Work.
+
+Production use of the software requires you to have a license of Portainer Business Edition (Node License) for the type and number of instances you intend to deploy in your environment.
+
+You can read the full license here: https://github.com/portainer/k2d/blob/main/LICENSE
+
+# Is k2d secure?
+
+At the first launch or start, the translator will generate a set of TLS certificates and a kubeconfig file. Each of these must be used by any remote connection to the translator (e.g., imported into the `kubeconfig` file on developer laptops). No anonymous access will be allowed! In addition, there is the K2D_SECRET environment variable, which protects the retrieval of the `kubeconfig` file.
+
+# Where can I provide feedback, or ask questions on k2d
+
+Open an issue via https://github.com/portainer/k2d

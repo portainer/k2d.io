@@ -1,0 +1,773 @@
+---
+title: 'Supported Resources and Operations'
+description: 'Supported Resources and Operations'
+sidebar_position: 3
+---
+
+# Cluster
+
+## Namespace
+
+Supported operations: `create`, `list`, `delete`, `get`, `patch`
+
+<details>
+
+<summary>Examples</summary>
+
+`kubectl`:
+
+```kubectl
+# list
+(⎈|k2d:N/A)➜ kubectl get namespaces
+NAME      STATUS   AGE
+default   Active   24m
+```
+
+</details>
+
+## Node
+
+Supported operations: `list`, `get`
+
+<details>
+
+<summary>Examples</summary>
+
+`kubectl`:
+
+```kubectl
+# list
+(⎈|k2d:N/A)➜ kubectl get nodes
+NAME     STATUS   ROLES    AGE   VERSION
+docker   Ready    master   26m   24.0.4
+# get
+(⎈|k2d:N/A)➜ kubectl get nodes docker -o yaml
+apiVersion: v1
+kind: Node
+metadata:
+  creationTimestamp: "2023-08-10T03:12:57Z"
+  labels:
+    beta.kubernetes.io/arch: aarch64
+    beta.kubernetes.io/os: linux
+    kubernetes.io/arch: aarch64
+    kubernetes.io/hostname: docker
+    kubernetes.io/os: linux
+    node-role.kubernetes.io/master: ""
+  name: docker
+  uid: 195913a8-0acb-4429-8a3a-7412bd2a1818
+spec:
+  providerID: k2d
+status:
+  capacity:
+    cpu: "8"
+    memory: 5379996Ki
+  conditions:
+  - lastHeartbeatTime: "2023-08-10T03:21:34Z"
+    lastTransitionTime: "2023-08-10T03:21:34Z"
+    message: kubelet is posting ready status
+    reason: KubeletReady
+    status: "True"
+    type: Ready
+  daemonEndpoints:
+    kubeletEndpoint:
+      Port: 0
+  nodeInfo:
+    architecture: aarch64
+    bootID: ""
+    containerRuntimeVersion: 24.0.5
+    kernelVersion: 6.4.7-orbstack-00058-g16f30394f179
+    kubeProxyVersion: ""
+    kubeletVersion: docker-24.0.5
+    machineID: 195913a8-0acb-4429-8a3a-7412bd2a1818
+    operatingSystem: linux
+    osImage: ""
+    systemUUID: 195913a8-0acb-4429-8a3a-7412bd2a1818
+
+# describe
+(⎈|k2d:N/A)➜ kubectl describe nodes docker
+Name:               docker
+Roles:              master
+Labels:             beta.kubernetes.io/arch=aarch64
+                    beta.kubernetes.io/os=linux
+                    kubernetes.io/arch=aarch64
+                    kubernetes.io/hostname=docker
+                    kubernetes.io/os=linux
+                    node-role.kubernetes.io/master=
+Annotations:        <none>
+CreationTimestamp:  Thu, 10 Aug 2023 15:12:57 +1200
+Taints:             <none>
+Unschedulable:      false
+Lease:              Failed to get lease: the server could not find the requested resource (get leases.coordination.k8s.io docker)
+Conditions:
+  Type    Status  LastHeartbeatTime                 LastTransitionTime                Reason         Message
+  ----    ------  -----------------                 ------------------                ------         -------
+  Ready   True    Thu, 10 Aug 2023 15:19:52 +1200   Thu, 10 Aug 2023 15:19:52 +1200   KubeletReady   kubelet is posting ready status
+Addresses:
+Capacity:
+  cpu:     8
+  memory:  5379996Ki
+System Info:
+  Machine ID:                 195913a8-0acb-4429-8a3a-7412bd2a1818
+  System UUID:                195913a8-0acb-4429-8a3a-7412bd2a1818
+  Boot ID:
+  Kernel Version:
+  OS Image:
+  Operating System:           linux
+  Architecture:               aarch64
+  Container Runtime Version:  24.0.5
+  Kubelet Version:            docker-24.0.5
+  Kube-Proxy Version:
+ProviderID:                   k2d
+Non-terminated Pods:          (1 in total)
+  Namespace                   Name       CPU Requests  CPU Limits  Memory Requests  Memory Limits  Age
+  ---------                   ----       ------------  ----------  ---------------  -------------  ---
+  default                     grafana    250m (3%)     500m (6%)   750Mi (14%)      1Gi (19%)      6m45s
+Allocated resources:
+  (Total limits may be over 100 percent, i.e., overcommitted.)
+  Resource           Requests     Limits
+  --------           --------     ------
+  cpu                250m (3%)    500m (6%)
+  memory             750Mi (14%)  1Gi (19%)
+  ephemeral-storage  0 (0%)       0 (0%)
+Events:              <none>
+```
+
+</details>
+
+## Persistent volume
+
+Supported operations: `list`, `get`
+
+<details>
+
+<summary>Examples</summary>
+
+`kubectl`:
+
+```kubectl
+# list
+(⎈|k2d:N/A)➜ kubectl get namespaces
+NAME      STATUS   AGE
+default   Active   24m
+```
+
+</details>
+
+## Node
+
+Supported operations: `list`, `get`
+
+<details>
+
+<summary>Examples</summary>
+
+`kubectl`:
+
+```kubectl
+# list
+(⎈|k2d:N/A)➜ kubectl get pv
+NAME                             CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS   CLAIM                     STORAGECLASS   REASON   AGE
+k2d-pv-node-red-node-red-claim   0          RWO            Retain           Bound    node-red/node-red-claim   local                   49s
+
+# get
+(⎈|k2d:N/A)➜ kubectl describe pv k2d-pv-node-red-node-red-claim
+Name:            k2d-pv-node-red-node-red-claim
+Labels:          <none>
+Annotations:     <none>
+Finalizers:      []
+StorageClass:    local
+Status:          Bound
+Claim:           node-red/node-red-claim
+Reclaim Policy:  Retain
+Access Modes:    RWO
+Capacity:        0
+Node Affinity:   <none>
+Message:
+Source:
+    Type:          HostPath (bare host directory volume)
+    Path:          /var/lib/docker/volumes/k2d-pv-node-red-node-red-claim/_data
+    HostPathType:  <none>
+Events:            <none>
+```
+
+</details>
+
+# Workload
+
+## Pod
+
+Supported operations: `create`, `list`, `delete`, `get`, `patch`, `logs`
+
+<details>
+
+<summary>Examples</summary>
+
+`kubectl`:
+
+```kubectl
+# create (or run!)
+(⎈|k2d:N/A)➜ kubectl run nginx --image=nginx:latest --port 80
+pod/nginx created
+
+# list
+(⎈|k2d:N/A)➜ kubectl get pods
+NAME        READY   STATUS    RESTARTS   AGE
+nginx.      1/1     Running   0          51s
+k2d         1/1     Running   0          30m
+portainer   1/1     Running   0          33m
+
+# get
+(⎈|k2d:N/A)➜ kubectl get pods nginx
+NAME    AGE
+nginx   94s
+
+(⎈|k2d:N/A)➜ kubectl get pods nginx -o yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: ""
+  creationTimestamp: "2023-07-26T21:11:09Z"
+  name: nginx
+  namespace: default
+spec:
+  containers:
+  - image: nginx:latest
+    name: nginx
+    resources: {}
+status:
+  containerStatuses:
+  - containerID: 3bbd21f74d736b558afe3253aaf61ee92d0e0ca50eab170fe262f8796705275b
+    image: ""
+    imageID: ""
+    lastState: {}
+    name: nginx
+    ready: true
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2023-07-26T21:11:09Z"
+  phase: Running
+
+# delete
+(⎈|k2d:N/A)➜ kubectl delete pods nginx
+pod "nginx" deleted
+(⎈|k2d:N/A)➜ kubectl get pods
+NAME        READY   STATUS    RESTARTS   AGE
+k2d         1/1     Running   0          34m
+portainer   1/1     Running   0          37m
+```
+
+`yaml`:
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+    name: nginx
+spec:
+    containers:
+        - name: nginx
+          image: nginx:1.21.4
+          ports:
+              - containerPort: 80
+```
+
+</details>
+
+The following is the complete list of supported objects for a `Pod` manifest:
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+    name:
+spec:
+    containers:
+        - name:
+          image:
+          command:
+          args:
+          ports:
+              - containerPort:
+                hostPort:
+          env:
+          envFrom:
+              - secretRef:
+              - configMapKeyRef:
+          volumeMounts:
+              - mountPath:
+                name:
+                subPath:
+                readOnly:
+          securityContext:
+              privileged:
+    restartPolicy:
+    volumes:
+        - name:
+          persistentVolumeClaim:
+              claimName:
+        - name:
+          hostPath:
+        - name:
+          configMap:
+        - name:
+          secret:
+    securityContext:
+        runAsUser:
+        runAsGroup:
+```
+
+## Deployment
+
+Supported operations: `create`, `list`, `delete`, `get`, `patch`
+
+<details>
+
+<summary>Examples</summary>
+
+`kubectl`:
+
+```kubectl
+# create
+(⎈|k2d:N/A)➜ kubectl create deployment nginx --image=nginx:latest
+deployment.apps/nginx created
+
+# list
+(⎈|k2d:N/A)➜ kubectl get deployment
+NAME    READY   UP-TO-DATE   AVAILABLE   AGE
+nginx   1/1     1            1           3s
+
+# get
+(⎈|k2d:N/A)➜  k2d  kubectl get deployment nginx -o yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: "2023-07-31T09:24:15Z"
+  name: nginx
+  namespace: default
+spec:
+  replicas: 1
+  selector: null
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+    spec:
+      containers:
+      - image: nginx:latest
+        name: nginx
+        resources: {}
+status:
+  availableReplicas: 1
+  readyReplicas: 1
+  replicas: 1
+  updatedReplicas: 1
+
+# delete
+(⎈|k2d:N/A)➜ kubectl delete deployment nginx
+deployment.apps "nginx" deleted
+```
+
+`yaml`:
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: influxdb-deployment
+spec:
+    template:
+        spec:
+            containers:
+                - image: influxdb:1.7.4
+                  name: influxdb
+                  ports:
+                      - containerPort: 8086
+                  volumeMounts:
+                      - mountPath: /var/lib/influxdb
+                        name: influxdb-data
+                      - mountPath: /etc/influxdb/influxdb.conf
+                        name: influxdb-config
+                        subPath: influxdb.conf
+                        readOnly: true
+                  envFrom:
+                      - secretRef:
+                            name: influxdb-secrets
+            volumes:
+                - name: influxdb-data
+                  hostPath:
+                      path: /var/lib/k2d/data/influxdb-data
+                - name: influxdb-config
+                  configMap:
+                      name: influxdb-config
+```
+
+</details>
+
+The following is the complete list of supported properties for a `Deployment` manifest:
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name:
+spec:
+    # only 1 replica is supported due to the nature of Docker standalone runtime
+    replicas: 1
+    selector:
+        matchLabels:
+    template:
+        metadata:
+            labels:
+        spec:
+            containers:
+                - name:
+                  image:
+                  command:
+                  args:
+                  ports:
+                      - containerPort:
+                        hostPort:
+                  env:
+                  envFrom:
+                      - secretRef:
+                      - configMapKeyRef:
+                  volumeMounts:
+                      - mountPath:
+                        name:
+                        subPath:
+                        readOnly:
+                  securityContext:
+                      privileged:
+            restartPolicy:
+            volumes:
+                - name:
+                  persistentVolumeClaim:
+                      claimName:
+                - name:
+                  hostPath:
+                - name:
+                  configMap:
+                - name:
+                  secret:
+            securityContext:
+                runAsUser:
+                runAsGroup:
+```
+
+# Storage
+
+## ConfigMap
+
+Supported operations: `create`, `list`, `delete`, `get`, `patch`
+
+<details>
+
+<summary>Examples</summary>
+
+`kubectl`:
+
+```kubectl
+# create
+(⎈|k2d:N/A)➜ kubectl create configmap --namespace default sample-config --from-file=sample.config
+configmap/sample-config created
+(⎈|k2d:N/A)➜ kubectl create configmap --namespace default sample-config-literal --from-literal=sql=sql:1433
+configmap/sample-config-literal created
+
+# list
+(⎈|k2d:N/A)➜ kubectl get configmaps
+NAME                    DATA   AGE
+sample-config           2      1s
+sample-config-literal   1      1s
+
+(⎈|k2d:N/A)➜  kubectl get configmaps -o yaml
+apiVersion: v1
+items:
+- apiVersion: v1
+  data:
+    sql: sql:1433
+  kind: ConfigMap
+  metadata:
+    creationTimestamp: "2023-07-17T22:48:04Z"
+    name: sample-config-literal
+- apiVersion: v1
+  data:
+    sample.config: sql=sql:1433
+  kind: ConfigMap
+  metadata:
+    creationTimestamp: "2023-07-17T22:48:04Z"
+    name: sample-config
+kind: List
+metadata:
+  resourceVersion: ""
+
+# delete
+(⎈|k2d:N/A)➜ kubectl delete configmaps sample-config
+configmap "sample-config" deleted
+
+(⎈|k2d:N/A)➜ kubectl delete configmaps sample-config-literal
+configmap "sample-config-literal" deleted
+
+(⎈|k2d:N/A)➜ kubectl get configmaps
+No resources found
+```
+
+</details>
+
+The following is the complete list of supported properties for a `ConfigMap` manifest:
+
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+    name:
+data:
+    single-line: value
+    multi-line: |
+        line 1
+        line 2
+        line 3
+```
+
+## Secret
+
+:::caution
+
+k2d supports only two types of secrets: Opaque and kubernetes.io/dockerconfigjson
+
+:::
+
+Supported operations: `create`, `list`, `delete`, `get`, `patch`
+
+### Opaque secret
+
+<details>
+
+<summary>Examples</summary>
+
+`kubectl`:
+
+```kubectl
+# create
+(⎈|k2d:N/A)➜  k2d  kubectl create secret generic --namespace default sample-secret --from-file=sample.config
+secret/sample-secret created
+(⎈|k2d:N/A)➜  k2d  kubectl create secret generic sample-literal-secret --from-literal=username=admin --from-literal=password=admin
+secret/sample-literal-secret created
+
+# list
+(⎈|k2d:N/A)➜ kubectl get secrets
+NAME                    TYPE     DATA   AGE
+sample-literal-secret   Opaque   2      18s
+sample-secret           Opaque   1      82s
+
+(⎈|k2d:N/A)➜  kubectl get secrets -o yaml
+apiVersion: v1
+items:
+- apiVersion: v1
+  data:
+    password: YWRtaW4=
+    username: YWRtaW4=
+  kind: Secret
+  metadata:
+    creationTimestamp: "2023-07-31T09:36:35Z"
+    name: sample-literal-secret
+  type: Opaque
+- apiVersion: v1
+  data:
+    sample.config: c3FsPXNxbDoxNDMz
+  kind: Secret
+  metadata:
+    creationTimestamp: "2023-07-31T09:35:32Z"
+    name: sample-secret
+  type: Opaque
+kind: List
+metadata:
+  resourceVersion: ""
+
+# delete
+(⎈|k2d:N/A)➜  k2d  kubectl delete secret sample-secret
+secret "sample-secret" deleted
+
+⎈|k2d:N/A)➜  k2d  kubectl delete secret sample-literal-secret
+secret "sample-literal-secret" deleted
+configmap "sample-config-literal" deleted
+
+(⎈|k2d:N/A)➜ kubectl get secrets
+No resources found
+```
+
+</details>
+
+The following is the complete list of supported properties for a `Secret` manifest:
+
+```yaml
+apiVersion: v1
+kind: Secret
+metadata:
+    name:
+type: Opaque
+data:
+    encoded-value: ZW5jb2RlZAo=
+stringData:
+    single-line: value
+    multi-line: |
+        line 1
+        line 2
+        line 3
+```
+
+### Registry Secret
+
+Registry secrets are stored inside Docker volumes and **encrypted at rest**.
+
+You can create a registry secret from an existing Docker configuration file:
+
+```bash
+> kubectl create secret generic regcred1 \
+    --from-file=.dockerconfigjson=/home/user/.docker/config.json \
+    --type=kubernetes.io/dockerconfigjson
+```
+
+You can also create a registry secret by passing all the required information on the CLI directly:
+
+```bash
+> kubectl create secret docker-registry regcred2 \
+    --docker-server=https://index.docker.io/v1/ \
+    --docker-username=username \
+    --docker-password=password \
+    --docker-email=username@mycompany.mydomain.tld
+```
+
+## Persistent Volume Claim
+
+Supported operations: `create`, `list`, `delete`, `get`, `patch`
+
+<details>
+
+<summary>Examples</summary>
+
+`kubectl`:
+
+```kubectl
+# list
+(⎈|k2d:N/A)➜  kubectl get pvc -A
+NAMESPACE   NAME             STATUS   VOLUME                           CAPACITY   ACCESS MODES   STORAGECLASS   AGE
+node-red    node-red-claim   Bound    k2d-pv-node-red-node-red-claim   0          RWO            local          7m9s
+
+# get
+(⎈|k2d:N/A)➜  kubectl describe pvc -n node-red node-red-claim
+Name:          node-red-claim
+Namespace:     node-red
+StorageClass:  local
+Status:        Bound
+Volume:        k2d-pv-node-red-node-red-claim
+Labels:        <none>
+Annotations:   <none>
+Finalizers:    []
+Capacity:      0
+Access Modes:  RWO
+Used By:       node-red
+Events:        <none>
+
+# delete
+(⎈|k2d:N/A)➜  kubectl delete pvc -n node-red node-red-claim
+persistentvolumeclaim "node-red-claim" deleted
+```
+
+</details>
+
+## Storage Class
+
+Supported operations: `list`, `get`
+
+<details>
+
+<summary>Examples</summary>
+
+`kubectl`:
+
+```kubectl
+# list
+(⎈|k2d:N/A)➜ kubectl get storageclasses
+NAME              PROVISIONER    RECLAIMPOLICY   VOLUMEBINDINGMODE      ALLOWVOLUMEEXPANSION   AGE
+local (default)   k2d.io/local   Retain          WaitForFirstConsumer   false                  6m40s
+
+# get
+(⎈|k2d:N/A)➜  kubectl describe storageclasses local
+Name:                  local
+IsDefaultClass:        Yes
+Annotations:           storageclass.kubernetes.io/is-default-class=true
+Provisioner:           k2d.io/local
+Parameters:            <none>
+AllowVolumeExpansion:  <unset>
+MountOptions:          <none>
+ReclaimPolicy:         Retain
+VolumeBindingMode:     WaitForFirstConsumer
+Events:                <none>
+```
+
+</details>
+
+## Service
+
+:::info
+
+When creating a service, make sure that it specifies a valid service selector.
+
+:::
+
+Supported operations: `create`, `list`, `delete`, `get`, `patch`
+
+<details>
+
+<summary>Examples</summary>
+
+`kubectl`:
+
+```kubectl
+# list
+(⎈|k2d:N/A)➜  k2d  kubectl get services
+NAME              TYPE        CLUSTER-IP      EXTERNAL-IP      PORT(S)                      AGE
+k2d               ClusterIP   <none>          192.168.68.250   <none>                       19m
+portainer         NodePort    <none>          192.168.68.250   9443/TCP,8000/TCP,9000/TCP   22m
+```
+
+`yaml`:
+
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+    name: node-red
+spec:
+    ports:
+        - name: '1880'
+          port: 1880
+          protocol: TCP
+          targetPort: 1880
+    type: ClusterIP
+```
+
+</details>
+
+The following is the complete list of supported properties for a `Service` manifest:
+
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+    name:
+    labels:
+spec:
+    # Either ClusterIP, NodePort, or Load Balancer is supported.
+    # If blank, it defaults to the ClusterIP type.
+    type:
+    ports:
+        - protocol:
+          port:
+          targetPort:
+          nodePort:
+    selector:
+```

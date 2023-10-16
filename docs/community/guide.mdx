@@ -1,0 +1,234 @@
+---
+title: 'Quick-Start Guide'
+description: 'This is the quick-start guide that will assist you in spinning up a k2d instance and start consuming it.'
+sidebar_position: 4
+---
+
+# Pre-requisites
+
+To install and configure `k2d`, the following pre-requisites must be met:
+
+-   docker server and client version 23.0+
+-   podman version 4.4.0+
+-   kubectl version 1.26+
+    -   This is not required on the k2d host, just on your management PC
+    -   Install kubectl from https://kubernetes.io/docs/tasks/tools/
+-   (optional) helm version 3.10+
+-   Hardware Requirements
+    -   ARM v7 CPU of 700MHhz or higher
+    -   512 MB RAM or higher
+    -   16GB SD-Card or greater
+
+# Upgrading from 1.0.0-alpha
+
+:::info
+
+The 1.0.0-beta build is not compatible with the 1.0.0-alpha build. If you used the 1.0.0-alpha on the system, make sure to remove resources that were created by k2d before using the instructions below.
+
+:::
+
+:::caution
+
+These instructions will remove all the containers previously created by k2d and their associated data.
+
+:::
+
+First, remove any existing k2d container:
+
+```bash
+docker rm -f k2d
+```
+
+Then you will need to remove all the containers that have been created by k2d previously:
+
+```bash
+docker rm -f $(docker ps -a --format '{{.ID}} {{.Labels}}' | awk '{for(i=2; i<=NF; i++) if ($i ~ /\.k2d\.io/) {print $1; exit}}')
+```
+
+Afterwards, remove any network created by k2d:
+
+```bash
+docker network rm $(docker network ls --format '{{.Name}}' | awk '/^k2d/ {print $0}')
+```
+
+Finally, clean up the k2d data folder:
+
+```bash
+rm -rf /var/lib/k2d
+```
+
+You can use the following one-liner to issue all the commands above at once:
+
+```bash
+docker rm -f k2d ; \
+docker rm -f $(docker ps -a --format '{{.ID}} {{.Labels}}' | awk '{for(i=2; i<=NF; i++) if ($i ~ /\.k2d\.io/) {print $1; exit}}') ; \
+docker network rm $(docker network ls --format '{{.Name}}' | awk '/^k2d/ {print $0}') ; \
+rm -rf /var/lib/k2d
+```
+
+# Installation
+
+:::info
+
+The k2d image can run on the following platforms/archs: linux/amd64, linux/arm64, linux/386, linux/armv6 and linux/armv7.
+
+:::
+
+The deployment of `k2d` is based on a simple Docker run:
+
+```
+
+docker run -d \
+  --name k2d-k2d \
+  --network host \
+  --restart always \
+  --env K2D_ADVERTISE_ADDR=YOUR_HOST_IP \
+  --env K2D_SECRET=YOUR_OWN_SECRET \
+  --label resource.k2d.io/namespace-name=k2d \
+  --label workload.k2d.io/name=k2d \
+  --volume /var/run/docker.sock:/var/run/docker.sock \
+  --volume /var/lib/k2d:/var/lib/k2d \
+  portainer/k2d:1.0.0-beta
+
+```
+
+-   Use the `K2D_ADVERTISE_ADDR` only if you have multiple net interfaces at the OS level
+-   The `K2D_SECRET` is used as an authentication token to secure the `k2d` API:
+    -   If the `K2D_SECRET` environment variable is not set, it will be automatically generated, and you can retrieve it in the `k2d` container logs
+-   Use of the `host` network is not mandatory. Using the `bridge` network is supported:
+    -   `K2D_ADVERTISE_ADDR` must be specified when using the `bridge` network
+    -   **Docker Desktop for Mac and Docker Desktop for Windows do not support the HOST network, so you must use the bridge network if testing on these platforms.**
+-   Use of the volume mounts is for:
+    -   The `/var/run/docker.sock` must be mounted to interact with the underlying Docker Engine server
+    -   The `/var/lib/k2d` path must be persisted for:
+        -   SSL certificates
+        -   Secrets
+        -   Configmaps
+        -   Kubernetes Token
+
+# Installation with Podman
+
+For Podman to work with k2d, the Podman Socket first needs to be enabled:
+
+```bash
+systemctl --user enable --now podman.socket
+```
+
+Then, create the k2d directory under `/var/lib` and change the owner to your user & group:
+
+Finally, you can use the following command to run k2d with Podman in the rootless mode:
+
+```
+podman run -d \
+  --name k2d-k2d \
+  --restart always \
+  --env K2D_ADVERTISE_ADDR=YOUR_HOST_IP \
+  --env K2D_SECRET=YOUR_OWN_SECRET \
+  --label resource.k2d.io/namespace-name=k2d \
+  --label workload.k2d.io/name=k2d \
+  --security-opt label=disable \
+  --publish 6443:6443 \
+  --volume /var/run/docker.sock:/var/run/docker.sock:ro \
+  --volume /var/lib/k2d:/var/lib/k2d \
+  portainer/k2d:1.0.0-beta
+```
+
+:::info
+
+The following memory-related issues have arisen for CentOS 9:
+
+-   crun: cannot set memory swappiness with cgroupv2
+-   crun: write to /proc/self/oom_score_adj: Permission denied: OCI permission denied
+
+It is recommended that CentOS 8 be run to avoid the problems listed above.
+
+:::
+
+# Installation with Docker via Snap
+
+When Docker Engine is installed via Snap, due to its confinement, most of the underlying directories are set to read-only. Hence, amending the default k2d data path is required.
+
+You can use the following command to run k2d with Docker installed via Snap:
+
+```bash
+docker run -d \
+  --name k2d-k2d \
+  --restart always \
+  --env K2D_ADVERTISE_ADDR=YOUR_HOST_IP \
+  --env K2D_SECRET=YOUR_OWN_SECRET \
+  --env K2D_DATA_PATH=${HOME}/k2d \
+  --label resource.k2d.io/namespace-name=k2d \
+  --label workload.k2d.io/name=k2d \
+  --publish 6443:6443 \
+  --volume /var/run/docker.sock:/var/run/docker.sock:ro \
+  --volume ${HOME}/k2d:${HOME}/k2d \
+  portainer/k2d:1.0.0-beta
+```
+
+# Usage
+
+The `k2d` instance exposes an API endpoint to return a `kubeconfig` format to start interacting with it:
+
+Note: You must use the `K2D_SECRET` to retrieve the config file successfully.
+
+```bash
+curl --insecure -H "Authorization: Bearer $(echo -n 'YOUR_OWN_SECRET' | base64)" https://YOUR_HOST_IP:6443/k2d/kubeconfig
+```
+
+The output can be saved directly to your local `~/.kube/config`, or set `KUBECONFIG` environment variable. You can treat it just like Kubernetes!
+
+Now, use `kubectl` to interact with the `k2d` translator:
+
+```bash
+> kubectl get namespaces
+NAME      STATUS   AGE
+default   Active   53s
+k2d       Active   52s
+```
+
+`helm` will also be supported as long as the chart contains the resources supported by `k2d`.
+
+# The List of Supported API Resources
+
+To identify which Kubernetes API resources are supported by `k2d`, you can run `kubectl` `api-resources` to obtain the list:
+
+```bash
+> kubectl api-resources
+NAME                       SHORTNAMES   APIVERSION                NAMESPACED   KIND
+configmaps                 cm           v1                        true         ConfigMap
+events                                  v1                        false        Event
+namespaces                 ns           v1                        false        Namespace
+nodes                                   v1                        false        Node
+persistentvolumeclaims     pvc          v1                        true         PersistentVolumeClaim
+persistentvolumes          pv           v1                        false        PersistentVolume
+pods                                    v1                        true         Pod
+secrets                                 v1                        true         Secret
+services                   svc          v1                        true         Service
+deployments                             apps/v1                   true         Deployment
+selfsubjectaccessreviews                authorization.k8s.io/v1   false        SelfSubjectAccessReview
+events                                  events.k8s.io/v1          false        Event
+storageclasses             sc           storage.k8s.io/v1         false        StorageClass
+```
+
+# Uninstall k2d
+
+In order to uninstall `k2d`, you can simply remove the k2d container:
+
+```bash
+docker rm -f k2d
+```
+
+To reset the system and remove all the resources that have been created by k2d and via k2d, you can use the following command:
+
+:::danger
+
+This command will remove any workload and data that have been deployed through k2d.
+
+:::
+
+```bash
+docker run --rm -it \
+  --volume /var/run/docker.sock:/var/run/docker.sock \
+  --volume /var/lib/k2d:/var/lib/k2d \
+  portainer/k2d:1.0.0-beta -reset
+```
