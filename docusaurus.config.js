@@ -95,7 +95,7 @@ module.exports = {
                 logo: {
                     alt: 'Logo',
                     src: 'img/logo.png',
-                    srcDark: 'img/logo.png',
+                    srcDark: 'img/logo-dark.png',
                     href: '/',
                     target: '_self',
                     width: 50,
@@ -131,7 +131,7 @@ module.exports = {
                     },
                     { to: '/blog', label: 'Blog', position: 'right' },
                     {
-                        href: 'https://github.com/',
+                        href: 'https://github.com/portainer/k2d',
                         position: 'right',
                         className: 'header-github-link',
                     },
