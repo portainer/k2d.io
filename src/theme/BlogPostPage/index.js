@@ -56,11 +56,11 @@ export default function BlogPostPage(props) {
                     <br />
                     <Giscus
                         key={1}
-                        id="comments"
-                        repo="alikehel/activecourses-comments"
-                        repoId="R_kgDOKD7Spw"
-                        category="Announcements"
-                        categoryId="DIC_kwDOKD7Sp84CYYQq"
+                        id="Comments"
+                        repo="portainer/k2d.io"
+                        repoId="R_kgDOKhIF7w"
+                        category="Comments"
+                        categoryId="DIC_kwDOKhIF784CaL1N"
                         mapping="pathname"
                         reactionsEnabled="1"
                         emitMetadata="0"
