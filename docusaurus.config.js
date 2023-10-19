@@ -5,7 +5,7 @@ const codeTheme = require('./src/utils/prism');
 module.exports = {
     title: 'K2D',
     // tagline: 'All the tools you need to build modern transactional notification experience',
-    url: 'https://www.k2d.tech',
+    url: 'https://www.k2d.io',
     baseUrl: '/',
     onBrokenLinks: 'throw',
     onBrokenMarkdownLinks: 'warn',
@@ -26,16 +26,7 @@ module.exports = {
             '@docusaurus/preset-classic',
             /** @type {import('@docusaurus/preset-classic').Options} */
             ({
-                docs: {
-                    sidebarCollapsed: true,
-                    sidebarPath: require.resolve('./sidebars.js'),
-                    // Please change this to your repo.
-                    editUrl: 'https://github.com/k2d/k2d/blob/main/',
-                    breadcrumbs: false,
-                    routeBasePath: '/',
-                    showLastUpdateAuthor: true,
-                    showLastUpdateTime: true,
-                },
+                docs: false,
                 theme: {
                     customCss: require.resolve('./src/css/custom.scss'),
                 },
@@ -95,7 +86,7 @@ module.exports = {
                 logo: {
                     alt: 'Logo',
                     src: 'img/logo.png',
-                    srcDark: 'img/logo.png',
+                    srcDark: 'img/logo-dark.png',
                     href: '/',
                     target: '_self',
                     width: 50,
@@ -105,33 +96,9 @@ module.exports = {
                         type: 'search',
                         position: 'right',
                     },
+                    { to: '/blog', label: 'Blog', position: 'left' },
                     {
-                        type: 'docSidebar',
-                        sidebarId: 'developmentSidebar',
-                        position: 'left',
-                        label: 'Development',
-                    },
-                    {
-                        type: 'docSidebar',
-                        sidebarId: 'contributingSidebar',
-                        position: 'left',
-                        label: 'Contributing',
-                    },
-                    {
-                        type: 'docSidebar',
-                        sidebarId: 'communitySidebar',
-                        position: 'left',
-                        label: 'Community',
-                    },
-                    {
-                        type: 'docSidebar',
-                        sidebarId: 'showcaseSidebar',
-                        position: 'left',
-                        label: 'Showcase',
-                    },
-                    { to: '/blog', label: 'Blog', position: 'right' },
-                    {
-                        href: 'https://github.com/',
+                        href: 'https://github.com/portainer/k2d',
                         position: 'right',
                         className: 'header-github-link',
                     },
