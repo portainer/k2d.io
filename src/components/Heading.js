@@ -1,6 +1,6 @@
 import { Box, Container, Typography, useTheme } from '@mui/material';
 import React from 'react';
-import HeaderImg from '../assets/header.png';
+import HeaderImg from '../assets/k2d-arch-diagram.png';
 import CusteomButton from './CusteomButton';
 
 const styles = {
