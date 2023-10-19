@@ -1,7 +1,7 @@
 import { Box, Container, Typography, useTheme } from '@mui/material';
 import React from 'react';
 import HeaderImg from '../assets/k2d-arch-diagram-small.png';
-import CusteomButton from './CusteomButton';
+import CustomButton from './CustomButton';
 
 const styles = {
     heading: {
@@ -64,8 +64,8 @@ function Heading() {
                             },
                         }}
                     >
-                        <CusteomButton txt={'Github'} />
-                        <CusteomButton txt={'Quickstart'} />
+                        <CustomButton txt={'Github'} />
+                        <CustomButton txt={'Quickstart'} />
                     </Box>
                 </Box>
                 <Box
