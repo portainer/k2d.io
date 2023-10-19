@@ -64,8 +64,8 @@ function Heading() {
                             },
                         }}
                     >
-                        <CusteomButton txt={'Get Started'} />
-                        <CusteomButton txt={'Learn More'} />
+                        <CusteomButton txt={'Github'} />
+                        <CusteomButton txt={'Quickstart'} />
                     </Box>
                 </Box>
                 <Box
