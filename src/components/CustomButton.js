@@ -2,7 +2,7 @@ import { useTheme } from '@emotion/react';
 import { Link } from '@mui/material';
 import React from 'react';
 
-function CusteomButton({ txt, link = '#' }) {
+function CustomButton({ txt, link = '#' }) {
     const theme = useTheme();
     return (
         <Link
@@ -22,4 +22,4 @@ function CusteomButton({ txt, link = '#' }) {
     );
 }
 
-export default CusteomButton;
+export default CustomButton;
