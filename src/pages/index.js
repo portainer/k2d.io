@@ -2,8 +2,6 @@ import Layout from '@theme/Layout';
 import React from 'react';
 import Features from '../components/Features';
 import Heading from '../components/Heading';
-import News from '../components/News';
-import Tools from '../components/Tools';
 
 function App() {
     return (
@@ -11,8 +9,6 @@ function App() {
             {/* <NavBar/> */}
             <Heading />
             <Features />
-            <Tools />
-            <News />
         </Layout>
     );
 }

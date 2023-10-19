@@ -1,6 +1,6 @@
 import { Box, Container, Typography, useTheme } from '@mui/material';
 import React from 'react';
-import HeaderImg from '../assets/k2d-arch-diagram-small.png';
+import HeaderImg from '../assets/k2d-arch-diagram.png';
 import CustomButton from './CustomButton';
 
 const styles = {
@@ -64,8 +64,8 @@ function Heading() {
                             },
                         }}
                     >
-                        <CustomButton txt={'Github'} />
-                        <CustomButton txt={'Quickstart'} />
+                        <CustomButton txt={'Github'} link={'https://github.com/portainer/k2d'}/>
+                        <CustomButton txt={'Quick Start'} link={'https://docs.k2d.io/quick-start-guide'}/>
                     </Box>
                 </Box>
                 <Box

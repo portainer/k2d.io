@@ -75,11 +75,6 @@ module.exports = {
                 insights: true,
                 // externalUrlRegex: '',
             },
-            docs: {
-                sidebar: {
-                    autoCollapseCategories: true,
-                },
-            },
             navbar: {
                 title: '',
                 hideOnScroll: true,
