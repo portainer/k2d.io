@@ -3,14 +3,14 @@ const codeTheme = require('./src/utils/prism');
 // With JSDoc @type annotations, IDEs can provide config autocompletion
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
 module.exports = {
-    title: 'K2D',
+    title: 'Kubernetes to Docker',
     // tagline: 'All the tools you need to build modern transactional notification experience',
     url: 'https://www.k2d.io',
     baseUrl: '/',
     onBrokenLinks: 'throw',
     onBrokenMarkdownLinks: 'warn',
     favicon: 'img/favicon.ico',
-    organizationName: 'k2d', // Usually your GitHub org/user name.
+    organizationName: 'Portainer', // Usually your GitHub org/user name.
     projectName: 'k2d', // Usually your repo name.
     plugins: [
         'docusaurus-plugin-sass',
@@ -119,36 +119,19 @@ module.exports = {
             footer: {
                 links: [
                     {
-                        title: 'Docs',
+                        title: 'Quick Links',
                         items: [
                             {
-                                label: 'TEST',
-                                to: 'https://google.com/',
+                                label: 'Documentation',
+                                to: 'https://docs.k2d.io/',
                             },
                             {
-                                label: 'TEST',
-                                to: 'https://google.com/',
+                                label: 'Github Project',
+                                to: 'https://github.com/portainer/k2d',
                             },
                             {
-                                label: 'TEST',
-                                to: 'https://google.com/',
-                            },
-                        ],
-                    },
-                    {
-                        title: 'DocSearch',
-                        items: [
-                            {
-                                label: 'Apply',
-                                to: 'https://google.com/',
-                            },
-                            {
-                                label: 'Issues',
-                                to: 'https://google.com/',
-                            },
-                            {
-                                label: 'Privacy',
-                                to: 'https://google.com/',
+                                label: 'Gituhub Organization',
+                                to: 'https://github.com/portainer/',
                             },
                         ],
                     },
@@ -156,12 +139,8 @@ module.exports = {
                         title: 'Community',
                         items: [
                             {
-                                label: 'Forum',
-                                to: 'https://google.com/',
-                            },
-                            {
-                                label: 'Discord',
-                                to: 'https://google.com/',
+                                label: 'Discussions',
+                                to: 'https://github.com/portainer/k2d/discussions',
                             },
                         ],
                     },
@@ -169,21 +148,13 @@ module.exports = {
                         title: 'Social',
                         items: [
                             {
-                                label: 'GitHub',
-                                to: 'https://google.com/',
-                            },
-                            {
                                 label: 'Twitter',
-                                to: 'https://google.com/',
-                            },
-                            {
-                                label: 'Blog',
-                                to: 'https://google.com/',
+                                to: 'https://twitter.com/portainerio',
                             },
                         ],
                     },
                 ],
-                copyright: `Copyright © ${new Date().getFullYear()} K2D`,
+                copyright: `Copyright © ${new Date().getFullYear()} Portainer`,
             },
             tableOfContents: {
                 minHeadingLevel: 2,
