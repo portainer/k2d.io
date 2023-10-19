@@ -96,7 +96,15 @@ module.exports = {
                         type: 'search',
                         position: 'right',
                     },
-                    { to: '/blog', label: 'Blog', position: 'left' },
+                    {   to: '/blog',
+                        label: 'Blog',
+                        position: 'left',
+                    },
+                    {
+                        href: 'https://docs.k2d.io',
+                        position: 'left',
+                        label: 'Documentation',
+                    },
                     {
                         href: 'https://github.com/portainer/k2d',
                         position: 'right',
