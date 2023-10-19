@@ -77,9 +77,9 @@ module.exports = {
             ],
             image: '/img/social-preview.png',
             algolia: {
-                appId: '1',
-                apiKey: '1',
-                indexName: '1',
+                appId: 'US57DJD9KR',
+                apiKey: 'af46586a1dad15cabac33362a3f4413d',
+                indexName: 'singular-valkyrie-213f39',
                 contextualSearch: true,
                 insights: true,
                 // externalUrlRegex: '',
