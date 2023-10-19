@@ -123,12 +123,6 @@ module.exports = {
                         position: 'left',
                         label: 'Community',
                     },
-                    {
-                        type: 'docSidebar',
-                        sidebarId: 'showcaseSidebar',
-                        position: 'left',
-                        label: 'Showcase',
-                    },
                     { to: '/blog', label: 'Blog', position: 'right' },
                     {
                         href: 'https://github.com/portainer/k2d',
