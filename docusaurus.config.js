@@ -96,24 +96,6 @@ module.exports = {
                         type: 'search',
                         position: 'right',
                     },
-                    {
-                        type: 'docSidebar',
-                        sidebarId: 'developmentSidebar',
-                        position: 'left',
-                        label: 'Development',
-                    },
-                    {
-                        type: 'docSidebar',
-                        sidebarId: 'contributingSidebar',
-                        position: 'left',
-                        label: 'Contributing',
-                    },
-                    {
-                        type: 'docSidebar',
-                        sidebarId: 'communitySidebar',
-                        position: 'left',
-                        label: 'Community',
-                    },
                     { to: '/blog', label: 'Blog', position: 'right' },
                     {
                         href: 'https://github.com/portainer/k2d',
