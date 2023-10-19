@@ -105,6 +105,11 @@ module.exports = {
                         position: 'right',
                         className: 'header-github-link',
                     },
+                    {
+                        href: 'https://github.com/portainer/k2d',
+                        position: 'right',
+                        className: 'header-dockerhub-link',
+                    },
                 ],
             },
             // footer: {
