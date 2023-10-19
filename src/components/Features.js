@@ -19,24 +19,14 @@ function Features() {
                 },
             }}
         >
-            <FeatureBlock heading="Fast and light.">
-                Daemonless, using the fastest technologies for a snappy experience. Our UI is
-                reactive and light on resource usage and won't drag you down.
+            <FeatureBlock heading="Kubernetes without K8s">
+                There are no Kubernetes components to manage, no etcd, no KubeDNS, etc. Only Docker (or Podman) is required.
             </FeatureBlock>
-            <FeatureBlock heading="Secure.">
-                Rootless containers allow you to contain privileges without compromising
-                functionality. Trusted by US government agencies for secure HPC at scale{' '}
-                <a href="#">case study</a>.
+            <FeatureBlock heading="Industrial IoT Device Support">
+                Linux enabled devices, with as little as 1x 700Mhz ARM32 CPU, 512MB of RAM, and a 16GB SD-Card can be managed as if they are a single-node Kubernetes instance..
             </FeatureBlock>
-            <FeatureBlock heading="Open.">
-                Podman is open source first and won't lock you in. Podman Desktop can be used as one
-                tool to manage all your containers, regardless of container engine - even if you
-                don't use Podman as your container engine.
-            </FeatureBlock>
-            <FeatureBlock heading={'Compatible'}>
-                Compatible with other OCI compliant container formats including Docker. Run your
-                legacy Docker containers (including docker-compose files) on Podman.{' '}
-                <a href="#">Learn more</a>
+            <FeatureBlock heading="Transparent Translator">
+                K2D is a real time translator, which means you can interface with the Docker environment either directly, using Docker commands, or remotely using the Kubernetes API that k2d exposes.
             </FeatureBlock>
         </Box>
     );
