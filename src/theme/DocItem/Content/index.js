@@ -1,6 +1,5 @@
 import { ThemeClassNames } from '@docusaurus/theme-common';
 import { useDoc } from '@docusaurus/theme-common/internal';
-import Giscus from '@giscus/react';
 import Heading from '@theme/Heading';
 import MDXContent from '@theme/MDXContent';
 import clsx from 'clsx';
@@ -37,21 +36,6 @@ export default function DocItemContent({ children }) {
             <br />
             <hr />
             <br />
-            <Giscus
-                key={1}
-                id="Comments"
-                repo="portainer/k2d.io"
-                repoId="R_kgDOKhIF7w"
-                category="Comments"
-                categoryId="DIC_kwDOKhIF784CaL1N"
-                mapping="pathname"
-                reactionsEnabled="1"
-                emitMetadata="0"
-                inputPosition="bottom"
-                theme="transparent_dark"
-                lang="en"
-                loading="lazy"
-            />
             <br />
             <br />
         </div>

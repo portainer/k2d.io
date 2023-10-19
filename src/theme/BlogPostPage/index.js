@@ -1,6 +1,5 @@
 import { HtmlClassNameProvider, ThemeClassNames } from '@docusaurus/theme-common';
 import { BlogPostProvider, useBlogPost } from '@docusaurus/theme-common/internal';
-import Giscus from '@giscus/react';
 import BlogLayout from '@theme/BlogLayout';
 import BlogPostItem from '@theme/BlogPostItem';
 import BlogPostPageMetadata from '@theme/BlogPostPage/Metadata';
@@ -54,21 +53,6 @@ export default function BlogPostPage(props) {
                     <br />
                     <hr />
                     <br />
-                    <Giscus
-                        key={1}
-                        id="Comments"
-                        repo="portainer/k2d.io"
-                        repoId="R_kgDOKhIF7w"
-                        category="Comments"
-                        categoryId="DIC_kwDOKhIF784CaL1N"
-                        mapping="pathname"
-                        reactionsEnabled="1"
-                        emitMetadata="0"
-                        inputPosition="bottom"
-                        theme='transparent_dark'
-                        lang="en"
-                        loading="lazy"
-                    />
                     <br />
                     <br />
                 </BlogPostPageContent>
