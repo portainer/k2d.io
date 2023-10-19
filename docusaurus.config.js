@@ -17,7 +17,7 @@ module.exports = {
         [
             'docusaurus-plugin-plausible',
             {
-                domain: 'k2d.tech',
+                domain: 'k2d.io',
             },
         ],
     ],
