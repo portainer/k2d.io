@@ -54,7 +54,7 @@ module.exports = {
             announcementBar: {
                 id: 'github_star_1',
                 content:
-                    '⭐️ If you like k2d, give it a star on <a target="_blank" rel="noopener noreferrer" href="https://github.com/">GitHub</a> ⭐️',
+                    '⭐️ Heading to KubeCon NA 2023 in Chicago, Join our k2d Sneak Peek session with the k2d team. <a target="_blank" rel="noopener noreferrer" href="https://bit.ly/3M1e0Yl">Register Now</a> ⭐️',
                 backgroundColor: '#212121',
                 textColor: '#fff',
             },
