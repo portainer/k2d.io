@@ -64,8 +64,8 @@ function Heading() {
                             },
                         }}
                     >
-                        <CustomButton txt={'Github'} link={'https://github.com'}/>
-                        <CustomButton txt={'Quickstart'} link={'https://docs.k2d.io/quick-start-guide'}/>
+                        <CustomButton txt={'Github'} link={'https://github.com/portainer/k2d'}/>
+                        <CustomButton txt={'Quick Start'} link={'https://docs.k2d.io/quick-start-guide'}/>
                     </Box>
                 </Box>
                 <Box
