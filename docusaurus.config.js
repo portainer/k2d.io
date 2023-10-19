@@ -5,7 +5,7 @@ const codeTheme = require('./src/utils/prism');
 module.exports = {
     title: 'K2D',
     // tagline: 'All the tools you need to build modern transactional notification experience',
-    url: 'https://www.k2d.tech',
+    url: 'https://www.k2d.io',
     baseUrl: '/',
     onBrokenLinks: 'throw',
     onBrokenMarkdownLinks: 'warn',
@@ -26,16 +26,7 @@ module.exports = {
             '@docusaurus/preset-classic',
             /** @type {import('@docusaurus/preset-classic').Options} */
             ({
-                docs: {
-                    sidebarCollapsed: true,
-                    sidebarPath: require.resolve('./sidebars.js'),
-                    // Please change this to your repo.
-                    editUrl: 'https://github.com/k2d/k2d/blob/main/',
-                    breadcrumbs: false,
-                    routeBasePath: '/',
-                    showLastUpdateAuthor: true,
-                    showLastUpdateTime: true,
-                },
+                docs: false,
                 theme: {
                     customCss: require.resolve('./src/css/custom.scss'),
                 },
