@@ -46,11 +46,10 @@ function Heading() {
                     }}
                 >
                     <Typography sx={styles.heading}>
-                        The best free & open source container tools
+                        Kubernetes™ to Docker™
                     </Typography>
-                    <Typography variant="body1" sx={{ fontSize: '20px',color:'#f5f6f7' }}>
-                        Manage containers, pods, and images with Podman. Seamlessly work with
-                        containers and Kubernetes from your local environment.
+                    <Typography variant="body1" sx={{ fontSize: '22px',color:'#f5f6f7' }}>
+                        A real-time Kubernetes API translator for the edge!
                     </Typography>
                     <Box
                         sx={{
