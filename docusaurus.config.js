@@ -103,13 +103,13 @@ module.exports = {
                     {
                         'aria-label': 'Docker repo',
                         to: 'https://hub.docker.com/r/portainer/k2d',
-                        position: 'left',
+                        position: 'right',
                         className: 'navbar__icon navbar__docker',
                       },
                       {
                         'aria-label': 'GitHub repo',
                         to: 'https://github.com/portainer/k2d',
-                        position: 'left',
+                        position: 'right',
                         className: 'navbar__icon navbar__github',
                       },
                 ],
