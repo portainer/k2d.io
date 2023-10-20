@@ -84,7 +84,7 @@ module.exports = {
                     srcDark: 'img/logo-dark.png',
                     href: '/',
                     target: '_self',
-                    width: 75,
+                    width: 50,
                 },
                 items: [
                     {
@@ -103,14 +103,13 @@ module.exports = {
                     {
                         'aria-label': 'Docker repo',
                         to: 'https://hub.docker.com/r/portainer/k2d',
-                        position: 'right',
+                        position: 'left',
                         className: 'navbar__icon navbar__docker',
-                        width: 75,
                       },
                       {
                         'aria-label': 'GitHub repo',
                         to: 'https://github.com/portainer/k2d',
-                        position: 'right',
+                        position: 'left',
                         className: 'navbar__icon navbar__github',
                       },
                 ],
