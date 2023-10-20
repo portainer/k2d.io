@@ -101,10 +101,10 @@ module.exports = {
                         label: 'Documentation',
                     },
                     {
-                        'aria-label': 'Twitter',
+                        'aria-label': 'Docker repo',
                         to: twitter,
                         position: 'right',
-                        className: 'navbar__icon navbar__twitter',
+                        className: 'navbar__icon navbar__docker',
                     },
                     {
                         'aria-label': 'GitHub repo',
