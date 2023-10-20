@@ -80,8 +80,8 @@ module.exports = {
                 hideOnScroll: true,
                 logo: {
                     alt: 'Logo',
-                    src: 'img/logo.png',
-                    srcDark: 'img/logo-dark.png',
+                    src: 'img/logo.svg',
+                    srcDark: 'img/logo-dark.svg',
                     href: '/',
                     target: '_self',
                     width: 50,
