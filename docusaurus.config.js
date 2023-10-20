@@ -102,16 +102,16 @@ module.exports = {
                     },
                     {
                         'aria-label': 'Docker repo',
-                        to: twitter,
+                        to: 'https://hub.docker.com/r/portainer/k2d',
                         position: 'right',
                         className: 'navbar__icon navbar__docker',
-                    },
-                    {
+                      },
+                      {
                         'aria-label': 'GitHub repo',
-                        to: repo,
+                        to: 'https://github.com/portainer/k2d',
                         position: 'right',
                         className: 'navbar__icon navbar__github',
-                    },
+                      },
                 ],
             },
             // footer: {

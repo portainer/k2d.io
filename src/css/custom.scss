@@ -27,23 +27,23 @@
 }
 
 .navbar__icon:before {
-    content: "";
-    display: flex;
-    height: 24px;
-    width: 24px;
-    background-color: var(--ifm-navbar-link-color);
-  }
-  
-  .navbar__icon:hover:before {
-    background-color: var(--ifm-navbar-link-hover-color);
-  }
-  
-  .navbar__github:before {
-    mask: url(/img/github.svg) no-repeat 100% 100%;
-    mask-size: cover;
-  }
-  
-  .navbar__docker:before {
-    mask: url(/img/docker.svg) no-repeat 100% 100%;
-    mask-size: cover;
-  }
+  content: "";
+  display: flex;
+  height: 24px;
+  width: 24px;
+  background-color: var(--ifm-navbar-link-color);
+}
+
+.navbar__icon:hover:before {
+  background-color: var(--ifm-navbar-link-hover-color);
+}
+
+.navbar__github:before {
+  mask: url(/img/github.svg) no-repeat 100% 100%;
+  mask-size: cover;
+}
+
+.navbar__docker:before {
+  mask: url(/img/docker.svg) no-repeat 100% 100%;
+  mask-size: cover;
+}
