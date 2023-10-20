@@ -68,11 +68,12 @@ module.exports = {
             ],
             image: '/img/social-preview.png',
             algolia: {
-                appId: 'US57DJD9KR',
-                apiKey: 'af46586a1dad15cabac33362a3f4413d',
-                indexName: 'singular-valkyrie-213f39',
+                appId: '4DIHFTG6M8',
+                apiKey: '3dd5113de5a0f6a279f56dd3ab216095',
+                indexName: 'k2d',
                 contextualSearch: true,
                 insights: true,
+                debug: false
                 // externalUrlRegex: '',
             },
             navbar: {
