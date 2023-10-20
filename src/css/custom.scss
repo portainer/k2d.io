@@ -40,10 +40,10 @@
 
 .navbar__github:before {
   mask: url(/img/github.svg) no-repeat 100% 100%;
-  mask-size: contain;
+  mask-size: cover;
 }
 
 .navbar__docker:before {
   mask: url(/img/docker.svg) no-repeat 100% 100%;
-  mask-size: contain;
+  mask-size: cover;
 }
