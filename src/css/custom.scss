@@ -1,0 +1,49 @@
+// /**
+//  * Any CSS included here will be global. The classic template
+//  * bundles Infima by default. Infima is a CSS framework designed to
+//  * work well for content-centric websites.
+//  */
+
+// @import 'home';
+
+[data-theme='dark'] {
+    --ifm-color-primary: #0BA5EC;
+    --ifm-color-primary-dark: #1D2939;
+    --ifm-color-primary-darker: #101828;
+    --ifm-color-primary-darkest: #101828;
+    --ifm-color-primary-light: #0B9AEC;
+    --ifm-color-primary-lighter: #6EDFDE;
+    --ifm-color-primary-lightest: #6EDFDE;
+}
+
+[data-theme='light'] {
+    --ifm-color-primary: #0BA5EC;
+    --ifm-color-primary-dark: #1D2939;
+    --ifm-color-primary-darker: #101828;
+    --ifm-color-primary-darkest: #101828;
+    --ifm-color-primary-light: #0B9AEC;
+    --ifm-color-primary-lighter: #6EDFDE;
+    --ifm-color-primary-lightest: #6EDFDE;
+}
+
+.navbar__icon:before {
+  content: "";
+  display: flex;
+  height: 32px;
+  width: 32px;
+  background-color: var(--ifm-navbar-link-color);
+}
+
+.navbar__icon:hover:before {
+  background-color: var(--ifm-navbar-link-hover-color);
+}
+
+.navbar__github:before {
+  mask: url(/img/github.svg) no-repeat 100% 100%;
+  mask-size: cover;
+}
+
+.navbar__docker:before {
+  mask: url(/img/docker.svg) no-repeat 100% 100%;
+  mask-size: cover;
+}
