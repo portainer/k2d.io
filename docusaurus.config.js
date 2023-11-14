@@ -51,13 +51,6 @@ module.exports = {
                 disableSwitch: false,
                 respectPrefersColorScheme: true,
             },
-            announcementBar: {
-                id: 'github_star_1',
-                content:
-                    '⭐️ Heading to KubeCon NA 2023 in Chicago, Join our k2d Sneak Peek session with the k2d team. <a target="_blank" rel="noopener noreferrer" href="https://bit.ly/3M1e0Yl">Register Now</a> ⭐️',
-                backgroundColor: '#212121',
-                textColor: '#fff',
-            },
             metadata: [
                 { name: 'robots', content: 'max-image-preview:large' },
                 { name: 'twitter:card', content: 'summary_large_image' },
