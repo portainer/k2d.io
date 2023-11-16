@@ -1,7 +1,5 @@
 import { Box, Container, Typography, useTheme } from '@mui/material';
 import React from 'react';
-import HeaderImg from '../assets/k2d-arch-diagram.png';
-import CustomButton from './CustomButton';
 
 const styles = {
     Videos: {
