@@ -51,8 +51,9 @@
   "devDependencies": {
     "@docusaurus/module-type-aliases": "3.0.0",
     "@docusaurus/types": "3.0.0",
-    "@tsconfig/docusaurus": "1.0.7",
-    "@types/react": "^17.0.14",
+    "@docusaurus/tsconfig": "3.0.0",
+    "@types/react": "^18.2.29",
+    "typescript": "~5.2.2",
     "@types/react-helmet": "6.1.6",
     "@types/react-router-dom": "5.3.3",
     "eslint-config-airbnb-typescript": "^17.0.0",
@@ -66,8 +67,7 @@
     "stylelint-config-recommended-scss": "^6.0.0",
     "stylelint-config-standard": "^25.0.0",
     "stylelint-order": "^5.0.0",
-    "stylelint-scss": "^4.2.0",
-    "typescript": "4.9.5"
+    "stylelint-scss": "^4.2.0"
   },
   "engines": {
     "node": ">=18.0"
