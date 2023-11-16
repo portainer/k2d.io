@@ -46,10 +46,10 @@ function Videos() {
                     }}
                 >
                     <Typography sx={styles.Videos}>
-                        Kubernetes™ to Docker™
+                        Talks and Videos
                     </Typography>
                     <Typography variant="body1" sx={{ fontSize: '22px',color:'#f5f6f7' }}>
-                        A real-time Kubernetes API translator for the edge!
+                        Learn more about from watching demonistrations and talks.
                     </Typography>
                     <Box
                         sx={{
@@ -64,8 +64,6 @@ function Videos() {
                             },
                         }}
                     >
-                        <CustomButton txt={'Github'} link={'https://github.com/portainer/k2d'}/>
-                        <CustomButton txt={'Quick Start'} link={'https://docs.k2d.io/quick-start-guide'}/>
                     </Box>
                 </Box>
                 <Box
@@ -79,17 +77,7 @@ function Videos() {
                         },
                     }}
                 >
-                    <Box
-                        component="img"
-                        src={HeaderImg}
-                        alt="banner"
-                        sx={{
-                            margin: 'auto',
-
-                            width: '90%',
-                            marginTop: '5rem',
-                        }}
-                    />
+<iframe width="33%" height="315" src="https://www.youtube.com/embed/PlV5SH5UX1c?si=SGyIZmP1iXWG6tie" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                 </Box>
             </Box>
         </Container>
