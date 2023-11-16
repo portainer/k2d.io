@@ -4,14 +4,14 @@ import HeaderImg from '../assets/k2d-arch-diagram.png';
 import CustomButton from './CustomButton';
 
 const styles = {
-    heading: {
+    Videos: {
         color: 'white',
         fontSize: '48px',
         fontWeight: 'bold',
         marginBottom: '1rem',
     },
 };
-function Heading() {
+function Videos() {
     const theme = useTheme();
     const med = theme.breakpoints.down(1000);
     return (
@@ -45,7 +45,7 @@ function Heading() {
                         },
                     }}
                 >
-                    <Typography sx={styles.heading}>
+                    <Typography sx={styles.Videos}>
                         Kubernetes™ to Docker™
                     </Typography>
                     <Typography variant="body1" sx={{ fontSize: '22px',color:'#f5f6f7' }}>
@@ -96,4 +96,4 @@ function Heading() {
     );
 }
 
-export default Heading;
+export default Videos;
