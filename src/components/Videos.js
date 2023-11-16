@@ -46,12 +46,9 @@ function Videos() {
                     <Typography sx={styles.Videos}>
                         Talks and Videos
                     </Typography>
-                    <Typography variant="body1" sx={{ fontSize: '22px',color:'#f5f6f7' }}>
-                        Learn more about from watching demonistrations and talks.
-                    </Typography>
                 </Box>
             </Box>
-            <iframe width="100%" height="500" src="https://www.youtube.com/embed/PlV5SH5UX1c?si=SGyIZmP1iXWG6tie" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            <iframe width="640" height="360" src="https://www.youtube.com/embed/PlV5SH5UX1c?si=SGyIZmP1iXWG6tie" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
         </Container>
     );
 }
