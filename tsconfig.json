@@ -6,10 +6,3 @@
 //         "jsx": "react"
 //     }
 // }
-
-{
-    "extends": "@docusaurus/tsconfig",
-       "compilerOptions": {
-         "baseUrl": "."
-    }
-}
