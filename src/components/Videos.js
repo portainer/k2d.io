@@ -23,7 +23,7 @@ function Videos() {
             <Box
                 marginInline="auto"
                 sx={{
-                    display: 'flex',
+                    display: 'left',
                     justifyContent: 'space-around',
                     gap: '20px',
                     [med]: {
