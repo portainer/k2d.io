@@ -51,23 +51,8 @@ function Videos() {
                     <Typography variant="body1" sx={{ fontSize: '22px',color:'#f5f6f7' }}>
                         Learn more about from watching demonistrations and talks.
                     </Typography>
-                    <Box
-                        sx={{
-                            marginBlock: '1rem',
-                            display: 'flex',
-                            gap: '1rem',
-
-                            margin: '1rem auto 0',
-                            [med]: {
-                                flexDirection: 'column',
-                                alignItems: 'center',
-                            },
-                        }}
-                    >
-                    </Box>
                 </Box>
 <iframe width="100%" height="315" src="https://www.youtube.com/embed/PlV5SH5UX1c?si=SGyIZmP1iXWG6tie" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                </Box>
             </Box>
         </Container>
     );
